@@ -11,6 +11,7 @@
     <modules>
         <module>chatgpt-api</module>
         <module>live-stream-api</module>
+        <module>common</module>
     </modules>
 
     <properties>
