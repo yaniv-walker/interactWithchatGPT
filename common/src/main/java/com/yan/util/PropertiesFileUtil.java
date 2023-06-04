@@ -1,8 +1,7 @@
 package com.yan.util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
@@ -58,7 +57,7 @@ public final class PropertiesFileUtil {
      */
     private static Properties readPropertiesFile(final String fileName) {
         Properties prop = null;
-        try (FileInputStream fis = new FileInputStream(fileName)) {
+        try (InputStream fis = PropertiesFileUtil.class.getClassLoader().getResourceAsStream(fileName)) {
             prop = new Properties();
             prop.load(fis);
         } catch(IOException e) {

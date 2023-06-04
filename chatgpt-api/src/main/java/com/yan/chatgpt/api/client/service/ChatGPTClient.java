@@ -3,6 +3,7 @@ package com.yan.chatgpt.api.client.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yan.chatgpt.api.client.domain.ChatGPTRequestVO;
 import com.yan.chatgpt.api.client.domain.ChatGPTResponseVO;
+import com.yan.util.PropertiesFileUtil;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -29,10 +30,13 @@ public class ChatGPTClient implements IChatGPTClient {
 //    private static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
     private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
-    // my key
+    private static final String OPENAI_API_PROPERTY_KEY = "api.openAI.key";
 
+    private static final String OPENAI_API_KEY;
 
-    private static final String OPENAI_API_KEY = "";
+    static {
+        OPENAI_API_KEY = PropertiesFileUtil.getProperty(OPENAI_API_PROPERTY_KEY);
+    }
 
     /**
      * get response info from ChatGPT.
