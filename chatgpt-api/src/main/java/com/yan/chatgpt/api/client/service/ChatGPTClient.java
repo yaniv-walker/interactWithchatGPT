@@ -24,7 +24,7 @@ import java.util.Objects;
  */
 public class ChatGPTClient implements IChatGPTClient {
 
-    private final Logger LOG = LoggerFactory.getLogger(ChatGPTClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChatGPTClient.class);
 
 //    private static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/davinci-codex/completions";
     private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
@@ -45,7 +45,7 @@ public class ChatGPTClient implements IChatGPTClient {
             return new ChatGPTResponseVO();
         }
         final OkHttpClient client = getOkHttpClient(requestVO.getProxyHost(), requestVO.getProxyPort());
-        Request request = getRequest(requestVO);
+        final Request request = getRequest(requestVO);
         return requestChatGPT(client, request);
     }
 
@@ -55,10 +55,10 @@ public class ChatGPTClient implements IChatGPTClient {
      * @param request the ChatGPT API need
      * @return ChatGPTResponseVO
      */
-    private ChatGPTResponseVO requestChatGPT(OkHttpClient client, Request request) {
+    private ChatGPTResponseVO requestChatGPT(final OkHttpClient client, final Request request) {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful() && response.body() != null) {
-                String responseBody = response.body().string();
+                final String responseBody = response.body().string();
                 // Parse the JSON response and extract the generated response from the model
                 // You can use a JSON library like Gson or Jackson for parsing the response
                 // Extract the generated response from the JSON and return it
@@ -83,12 +83,12 @@ public class ChatGPTClient implements IChatGPTClient {
     @NotNull
     private Request getRequest(final ChatGPTRequestVO requestVO) {
         try {
-            MediaType mediaType = MediaType.parse("application/json");
-            String json = requestVO.toJSON();
+            final MediaType mediaType = MediaType.parse("application/json");
+            final String json = requestVO.toJSON();
             if (LOG.isInfoEnabled()) {
                 LOG.info("Request JSON: {}", json);
             }
-            RequestBody requestBody = RequestBody.create(json, mediaType);
+            final RequestBody requestBody = RequestBody.create(json, mediaType);
             return new Request.Builder()
                     .url(OPENAI_API_URL)
                     .post(requestBody)
@@ -107,11 +107,11 @@ public class ChatGPTClient implements IChatGPTClient {
      */
     @NotNull
     private OkHttpClient getOkHttpClient(final String proxyHost, final Integer proxyPort) {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        final OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
         // Configure proxy server if needed
         if (StringUtils.isNotBlank(proxyHost)) {
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+            final Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
             clientBuilder.proxy(proxy);
         }
 
