@@ -68,7 +68,7 @@ public class ChatGPTClient implements IChatGPTClient {
                 // Extract the generated response from the JSON and return it
                 return extractGeneratedResponse(responseBody);
             } else {
-                throw new IllegalStateException("Error: " + response.code() + " - " +
+                throw new IllegalStateException("Request error: " + response.code() + " - " +
                         (response.body() != null ? response.body().string() : null));
             }
         } catch (Exception e) {
