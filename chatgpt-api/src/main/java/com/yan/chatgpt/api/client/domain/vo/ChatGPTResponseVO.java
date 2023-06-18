@@ -1,11 +1,13 @@
-package com.yan.chatgpt.api.client.domain;
+package com.yan.chatgpt.api.client.domain.vo;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ChatGPT响应.
@@ -26,6 +28,7 @@ public class ChatGPTResponseVO implements Serializable {
     private String object;
     private Integer created;
     private String model;
+
     private List<ChoiceInfoVO> choices;
     private UsageInfoVO usage;
 
@@ -35,7 +38,12 @@ public class ChatGPTResponseVO implements Serializable {
      * @return ChatGPTResponse object
      */
     public static ChatGPTResponseVO readValueFromJSON(final String json) throws IOException {
+        String dataJson = json;
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json, ChatGPTResponseVO.class);
+        final JsonNode data = objectMapper.readTree(json).get("data");
+        if (!Objects.isNull(data)) {
+            dataJson = data.asText();
+        }
+        return objectMapper.readValue(dataJson, ChatGPTResponseVO.class);
     }
 }

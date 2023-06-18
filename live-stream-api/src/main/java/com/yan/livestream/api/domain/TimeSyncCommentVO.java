@@ -153,4 +153,14 @@ public class TimeSyncCommentVO implements Serializable {
      * The ID of the danmaku in string format.
      */
     private String id_str;
+
+    /**
+     * wealth level.
+     */
+    private Integer wealth_level;
+
+    /**
+     * bubble id.
+     */
+    private String bubble_id_v2;
 }

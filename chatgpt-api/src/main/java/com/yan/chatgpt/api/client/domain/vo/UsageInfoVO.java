@@ -1,4 +1,4 @@
-package com.yan.chatgpt.api.client.domain;
+package com.yan.chatgpt.api.client.domain.vo;
 
 import lombok.*;
 

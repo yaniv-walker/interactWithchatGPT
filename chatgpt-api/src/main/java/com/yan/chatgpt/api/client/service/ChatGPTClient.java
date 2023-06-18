@@ -1,8 +1,8 @@
 package com.yan.chatgpt.api.client.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.yan.chatgpt.api.client.domain.ChatGPTRequestVO;
-import com.yan.chatgpt.api.client.domain.ChatGPTResponseVO;
+import com.yan.chatgpt.api.client.domain.vo.ChatGPTRequestVO;
+import com.yan.chatgpt.api.client.domain.vo.ChatGPTResponseVO;
 import com.yan.util.PropertiesFileUtil;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -131,6 +131,10 @@ public class ChatGPTClient implements IChatGPTClient {
     private static ChatGPTResponseVO extractGeneratedResponse(String responseBody) throws IOException {
         // Implement the JSON parsing logic to extract the generated response
         // Return the generated response from the JSON data
+        if (LOG.isInfoEnabled()) {
+            LOG.info("ChatGPT response is {}", responseBody);
+        }
+
         return ChatGPTResponseVO.readValueFromJSON(responseBody);
     }
 

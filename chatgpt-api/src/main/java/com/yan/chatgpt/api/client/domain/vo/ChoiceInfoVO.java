@@ -1,4 +1,4 @@
-package com.yan.chatgpt.api.client.domain;
+package com.yan.chatgpt.api.client.domain.vo;
 
 import lombok.*;
 
@@ -19,6 +19,10 @@ import java.io.Serializable;
 @ToString
 public class ChoiceInfoVO implements Serializable {
 
+    /**
+     * use it in stream mode.
+     */
+    private ChoiceDeltaInfoVO delta;
     private String text;
     private MessageInfoVO message;
     private Integer index;

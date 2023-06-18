@@ -1,7 +1,7 @@
 package com.yan.chatgpt.api.client.service;
 
-import com.yan.chatgpt.api.client.domain.ChatGPTRequestVO;
-import com.yan.chatgpt.api.client.domain.ChatGPTResponseVO;
+import com.yan.chatgpt.api.client.domain.vo.ChatGPTRequestVO;
+import com.yan.chatgpt.api.client.domain.vo.ChatGPTResponseVO;
 
 /**
  * ChatGPT API调用端.
